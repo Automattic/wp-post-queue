@@ -2,7 +2,7 @@
 /*
  * Plugin Name: WordPress Post Queue
  * Description: A plugin to add a Tumblr-like queue feature for WordPress posts.
- * Version: 1.0
+ * Version: 0.1.0
  * Author: Automattic
  * Text Domain: wp-post-queue
  * Domain Path: /languages
