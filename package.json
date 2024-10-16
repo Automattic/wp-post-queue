@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "wp-scripts build",
-    "start": "wp-scripts start"
+    "start": "wp-scripts start",
+    "lint": "eslint client --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint client --ext .js,.jsx,.ts,.tsx --fix"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +15,11 @@
     "@wordpress/api-fetch": "^7.9.0",
     "@wordpress/edit-post": "^8.9.0",
     "@wordpress/plugins": "^7.9.0",
-    "@wordpress/scripts": "^30.1.0"
+    "@wordpress/scripts": "^30.1.0",
+    "react": "^18.3.1",
+    "sortablejs": "^1.15.3"
   },
   "devDependencies": {
-    "@types/react": "^18.3.11",
-    "@types/sortablejs": "^1.15.8",
-    "ts-loader": "^9.5.1"
+    "@wordpress/eslint-plugin": "^21.3.0"
   }
 }

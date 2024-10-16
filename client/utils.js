@@ -6,19 +6,18 @@ import { __ } from '@wordpress/i18n';
  * For example, "3 pm" becomes 15, and "12 am" becomes 0.
  *
  * @param {string} time - The time string in 12-hour format.
- * @returns {number} - The hour in 24-hour format.
+ * @return {number} - The hour in 24-hour format.
  */
-export const convertTo24HourFormat = (time) => {
-    const [hour, period] = time.split(' ');
-    let hour24 = parseInt(hour, 10);
-    if (period === 'pm' && hour24 !== 12) {
-        hour24 += 12;
-    } else if (period === 'am' && hour24 === 12) {
-        hour24 = 0;
-    }
-    return hour24;
+export const convertTo24HourFormat = ( time ) => {
+	const [ hour, period ] = time.split( ' ' );
+	let hour24 = parseInt( hour, 10 );
+	if ( period === 'pm' && hour24 !== 12 ) {
+		hour24 += 12;
+	} else if ( period === 'am' && hour24 === 12 ) {
+		hour24 = 0;
+	}
+	return hour24;
 };
-
 
 /**
  * This function updates the table with new publish times for queued posts so we don't have to reload the page.
@@ -27,17 +26,20 @@ export const convertTo24HourFormat = (time) => {
  *
  * @param {Array} updatedPosts - An array of updated post objects containing ID, new publish time, and a formatted date column.
  */
-export const updateTable = (updatedPosts) => {
-    const table = document.getElementById('the-list');
-    updatedPosts.forEach(post => {
-        const row = document.getElementById(`post-${post.ID}`);
-        if (row) {
-            const dateCell = row.querySelector('.column-date');
-            if (dateCell) {
-                dateCell.innerHTML = `${__('Queued', 'wp-post-queue')}<br />${post.date_column}`;
-            }
-            // Reorder the row in the table
-            table.appendChild(row);
-        }
-    });
-}
+export const updateTable = ( updatedPosts ) => {
+	const table = document.getElementById( 'the-list' );
+	updatedPosts.forEach( ( post ) => {
+		const row = document.getElementById( `post-${ post.ID }` );
+		if ( row ) {
+			const dateCell = row.querySelector( '.column-date' );
+			if ( dateCell ) {
+				dateCell.innerHTML = `${ __(
+					'Queued',
+					'wp-post-queue'
+				) }<br />${ post.date_column }`;
+			}
+			// Reorder the row in the table
+			table.appendChild( row );
+		}
+	} );
+};
