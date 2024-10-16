@@ -4,6 +4,7 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
+    "plugin-zip": "wp-scripts plugin-zip",
     "lint": "eslint client --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint client --ext .js,.jsx,.ts,.tsx --fix"
   },

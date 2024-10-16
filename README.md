@@ -62,6 +62,14 @@ To start the development server, use:
 npm run start
 ```
 
+### Creating a Plugin ZIP
+
+To create a plugin ZIP file, use:
+
+```bash
+npm run plugin-zip
+```
+
 ### Running Tests
 
 If neccessary, a Docker setup is available for the WordPress tests, since they require MySQL, unlike Studio which uses SQLite.

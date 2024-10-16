@@ -3,6 +3,7 @@ node_modules/
 
 # PHP
 vendor/
+.phpunit.result.cache
 
 # Environment variables
 .env
@@ -26,4 +27,6 @@ build/
 *.tmp
 *.temp
 *.swp
-.phpunit.result.cache
+
+# Plugin zip
+wp-post-queue.zip
