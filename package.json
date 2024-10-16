@@ -8,15 +8,20 @@
     "lint": "eslint client --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint client --ext .js,.jsx,.ts,.tsx --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": {
+    "name": "Automattic",
+    "url": "https://automattic.com"
+  },
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "wordpress"
+  ],
+  "description": "A WordPress plugin designed to help you manage and schedule your blog posts efficiently. It allows you to configure the number of posts to publish per day, set start and end times for publishing, and pause or resume the queue as needed.",
   "dependencies": {
     "@wordpress/api-fetch": "^7.9.0",
     "@wordpress/edit-post": "^8.9.0",
     "@wordpress/plugins": "^7.9.0",
-    "@wordpress/scripts": "^30.1.0",
+    "@wordpress/scripts": "^30.2.0",
     "react": "^18.3.1",
     "sortablejs": "^1.15.3"
   },
