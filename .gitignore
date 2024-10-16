@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+
+# PHP
+vendor/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
+
+# Build directories
+build/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+.phpunit.result.cache
