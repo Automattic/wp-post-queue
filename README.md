@@ -88,3 +88,35 @@ To run the tests, follow these steps:
     ```
 
 3. **Troubleshooting**: If you encounter any issues, ensure that your database credentials are correct and that the database is accessible. Also, verify that the WordPress version specified is available.
+
+### Linting & Code Standards
+
+WordPress coding standards are enforced using PHP_CodeSniffer and ESLint.
+
+#### JavaScript
+
+To lint JavaScript files, we use ESLint. You can run the linter with the following command:
+
+```bash
+npm run lint
+```
+
+To automatically fix some of the issues, you can use:
+
+```bash
+npm run lint:fix
+```
+
+#### PHP
+
+For PHP files, we use PHP_CodeSniffer. You can run the linter with the following command:
+
+```bash
+composer run lint:php
+```
+
+To automatically fix some of the issues, you can use:
+
+```bash
+composer run format:php
+```
