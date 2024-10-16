@@ -26,7 +26,7 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
         $this->manager = $this->getMockBuilder(Manager::class)
             ->setConstructorArgs([$this->settings])
-            ->onlyMethods(['getCurrentTime'])
+            ->onlyMethods(['get_current_time'])
             ->getMock();
     }
 
@@ -174,11 +174,11 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
     public function test_calculate_next_publish_time($settings, $expected_times, $queued_posts, $current_time = null) {
         $this->manager = $this->getMockBuilder(Manager::class)
             ->setConstructorArgs([$settings])
-            ->onlyMethods(['getCurrentTime'])
+            ->onlyMethods(['get_current_time'])
             ->getMock();
 
         $current_time = $current_time ?? strtotime('today 23:59:59');
-        $this->manager->method('getCurrentTime')
+        $this->manager->method('get_current_time')
             ->willReturn($current_time);
 
         $calculated_times = [];

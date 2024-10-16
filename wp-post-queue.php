@@ -8,16 +8,16 @@
  * Domain Path: /languages
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-queue.php';
-require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-queue-rest-api.php';
-require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-queue-admin.php';
-require_once plugin_dir_path(__FILE__) . 'includes/class-wp-post-queue-manager.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-queue.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-queue-rest-api.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-queue-admin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-post-queue-manager.php';
 
 use WP_Post_Queue\WP_Post_Queue;
 
-$plugin = new WP_Post_Queue();
-$plugin->run();
+$wp_post_queue = new WP_Post_Queue();
+$wp_post_queue->run();

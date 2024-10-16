@@ -17,17 +17,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="tumblr3"/>
-			</property>
-		</properties>
-	</rule>
-
-	<!-- Check that the proper prefix is used everywhere. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<property name="prefixes" type="array">
-				<element value="tumblr3_"/>
-				<element value="Chrysalis\T3"/>
+				<element value="wp-post-queue"/>
 			</property>
 		</properties>
 	</rule>
