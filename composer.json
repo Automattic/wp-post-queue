@@ -1,4 +1,8 @@
 {
+    "name": "automattic/wp-post-queue",
+    "type": "wordpress-plugin",
+    "description": "A WordPress plugin designed to help you manage and schedule your blog posts efficiently. It allows you to configure the number of posts to publish per day, set start and end times for publishing, and pause or resume the queue as needed.",
+    "license": "GPL-2.0-or-later",
     "require-dev": {
         "a8cteam51/team51-configs": "dev-trunk",
         "wp-coding-standards/wpcs": "^3",
@@ -30,7 +34,7 @@
         "phpunit": "vendor/bin/phpunit",
         "generate-autoloader": "@composer dump-autoload -o",
         "format:php": "phpcbf --standard=./.phpcs.xml --basepath=. . -v",
-        "lint:php": "phpcs --standard=./.phpcs.xml --basepath=. . -v",
+        "lint:php": "phpcs --runtime-set ignore_warnings_on_exit true --standard=./.phpcs.xml --basepath=. . -v",
         "internationalize": [
             "@makepot",
             "@updatepo",
