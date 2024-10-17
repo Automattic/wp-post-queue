@@ -5,8 +5,10 @@
     "build": "wp-scripts build",
     "start": "wp-scripts start",
     "plugin-zip": "wp-scripts plugin-zip",
-    "lint": "eslint client --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint client --ext .js,.jsx,.ts,.tsx --fix"
+    "lint:scripts": "eslint client --ext .js,.jsx,.ts,.tsx",
+    "lint:styles": "wp-scripts lint-style",
+    "lint:fix:scripts": "eslint client --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:fix:styles": "wp-scripts lint-style --fix"
   },
   "author": {
     "name": "Automattic",
@@ -26,6 +28,7 @@
     "sortablejs": "^1.15.3"
   },
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^21.3.0"
+    "@wordpress/eslint-plugin": "^21.3.0",
+    "@wordpress/stylelint-config": "^23.2.0"
   }
 }
