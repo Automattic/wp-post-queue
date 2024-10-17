@@ -112,7 +112,7 @@ npm run lint:scripts
 To automatically fix some of the issues, you can use:
 
 ```bash
-lint:fix:scripts
+npm run lint:fix:scripts
 ```
 
 #### CSS
@@ -126,7 +126,7 @@ npm run lint:styles
 To automatically fix some of the issues, you can use:
 
 ```bash
-lint:fix:styles
+npm run lint:fix:styles
 ```
 
 #### PHP
