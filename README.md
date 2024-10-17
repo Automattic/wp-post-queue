@@ -99,20 +99,34 @@ To run the tests, follow these steps:
 
 ### Linting & Code Standards
 
-WordPress coding standards are enforced using PHP_CodeSniffer and ESLint.
+This project uses a combination of ESLint, Stylelint, and PHP_CodeSniffer to enforce WordPress code standards.
 
 #### JavaScript
 
 To lint JavaScript files, we use ESLint. You can run the linter with the following command:
 
 ```bash
-npm run lint
+npm run lint:scripts
 ```
 
 To automatically fix some of the issues, you can use:
 
 ```bash
-npm run lint:fix
+lint:fix:scripts
+```
+
+#### CSS
+
+To lint CSS files, we use Stylelint. You can run the linter with the following command:
+
+```bash
+npm run lint:styles
+```
+
+To automatically fix some of the issues, you can use:
+
+```bash
+lint:fix:styles
 ```
 
 #### PHP

@@ -1,85 +1,88 @@
 .settings-panel {
-    border: 1px solid var(--wp-admin-border-color, #e0e0e0);
-    border-radius: 5px;
-    padding: 10px;
+	border: 1px solid var(--wp-admin-border-color, #e0e0e0);
+	border-radius: 5px;
+	padding: 10px;
 
-    p {
-        margin-bottom: 10px;
-    }
+	p {
+		margin-bottom: 10px;
+	}
 
-    p:first-child {
-        margin-top: 0;
-    }
+	p:first-child {
+		margin-top: 0;
+	}
 
-    .settings-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        align-items: last baseline;
+	.settings-actions {
+		display: flex;
+		gap: 10px;
+		margin-top: 20px;
+		align-items: last baseline;
 
-        .components-button.is-primary {
-            background: var(--wp-admin-theme-color, #2271b1);
-            border: 1px solid var(--wp-admin-theme-color, #2271b1);
-            color: var(--wp-components-color-accent-inverted, #fff);
-            min-height: 30px;
-            padding: 0 10px;
-            cursor: pointer;
-            border-radius: 3px;
+		.components-button.is-primary {
+			background: var(--wp-admin-theme-color, #2271b1);
+			border: 1px solid var(--wp-admin-theme-color, #2271b1);
+			color: var(--wp-components-color-accent-inverted, #fff);
+			min-height: 30px;
+			padding: 0 10px;
+			cursor: pointer;
+			border-radius: 3px;
 
-            &:hover {
-                background: var(--wp-admin-theme-color-darker-10, #135e96);
-                border-color: var(--wp-admin-theme-color-darker-10, #135e96);
-            }
-        }
+			&:hover {
+				background: var(--wp-admin-theme-color-darker-10, #135e96);
+				border-color: var(--wp-admin-theme-color-darker-10, #135e96);
+			}
+		}
 
-        .components-button.is-secondary {
-            background: var(--wp-admin-secondary-color, #f6f7f7);
-            border-color: var(--wp-admin-theme-color, #2271b1);
-            color: var(--wp-admin-theme-color, #2271b1);
-            min-height: 30px;
-            padding: 0 10px;
-            cursor: pointer;
+		.components-button.is-secondary {
+			background: var(--wp-admin-secondary-color, #f6f7f7);
+			border-color: var(--wp-admin-theme-color, #2271b1);
+			color: var(--wp-admin-theme-color, #2271b1);
+			min-height: 30px;
+			padding: 0 10px;
+			cursor: pointer;
+ 
+			&:hover {
+				background: var(--wp-admin-secondary-color-darker-10, #f0f0f1);
+				border-color: var(--wp-admin-theme-color-darker-20, #0a4b78);
+				color: var(--wp-admin-theme-color-darker-20, #0a4b78);
+			}
+		}
+	}
 
-            &:hover {
-                background: var(--wp-admin-secondary-color-darker-10, #f0f0f1);
-                border-color: var(--wp-admin-theme-color-darker-20, #0a4b78);
-                color: var(--wp-admin-theme-color-darker-20, #0a4b78);
-            }
-        }
-    }
-
-    .paused-notice, .error-notice {
-        margin-top: 10px;
-        border-radius: 3px;
-    }
+	.paused-notice,
+ 	.error-notice {
+		margin-top: 10px;
+		border-radius: 3px;
+	}
 }
 
 .settings-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: -10px;
+	display: flex;
+	gap: 10px;
+	margin-bottom: -10px;
 
-    .components-flex-item {
-        max-width: 100%;
-    }
+	.components-flex-item {
+		max-width: 100%;
+	}
 
-    .components-base-control {
-        .components-base-control__field {
-            .components-select-control {
-                align-items: center;
-                flex-direction: row;
+	.components-base-control {
 
-                .components-input-control__label {
-                    text-transform: initial;
-                    font-size: 13px;
-                    line-height: 1.5;
-                    font-weight: normal;
-                }
-            }
-        }
-    }
+		.components-base-control__field {
+
+			.components-select-control {
+				align-items: center;
+				flex-direction: row;
+
+				.components-input-control__label {
+					text-transform: initial;
+					font-size: 13px;
+					line-height: 1.5;
+					font-weight: 400;
+				}
+			}
+		}
+	}
 }
 
 #queue-settings-panel {
-    margin-top: 40px;
+	margin-top: 40px;
 }
