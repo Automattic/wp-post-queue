@@ -71,7 +71,7 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 		$modified_columns = $this->admin->conditionally_add_drag_handle_column( $columns );
 
 		$this->assertArrayHasKey( 'drag_handle', $modified_columns );
-		$this->assertEquals( '☰', $modified_columns['drag_handle'] );
+		$this->assertEquals( '<span class="dashicons dashicons-menu-alt"></span>', $modified_columns['drag_handle'] );
 	}
 
 	/**

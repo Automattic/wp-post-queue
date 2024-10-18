@@ -265,7 +265,7 @@ class Admin {
 	 */
 	public function conditionally_add_drag_handle_column( $columns ) {
 		if ( 'queued' === get_query_var( 'post_status' ) ) {
-			$new_columns = array( 'drag_handle' => '☰' );
+			$new_columns = array( 'drag_handle' => '<span class="dashicons dashicons-menu-alt"></span>' );
 			return array_merge( $new_columns, $columns );
 		}
 		return $columns;
@@ -281,7 +281,7 @@ class Admin {
 	 */
 	public function conditionally_populate_drag_handle_column( $column, $post_id ) {
 		if ( 'drag_handle' === $column && 'queued' === get_query_var( 'post_status' ) ) {
-			echo '<span class="drag-handle">☰</span>';
+			echo '<span class="drag-handle"><span class="dashicons dashicons-menu-alt"></span></span>';
 		}
 	}
 
