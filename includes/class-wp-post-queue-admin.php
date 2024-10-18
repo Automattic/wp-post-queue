@@ -60,7 +60,7 @@ class Admin {
 			'wp-queue-plugin',
 			plugins_url( '/build/editor.js', __DIR__ ),
 			array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data' ),
-			filemtime( plugin_dir_path( __DIR__ ) . 'build/editor.js' ),
+			WP_POST_QUEUE_VERSION,
 			true
 		);
 	}
@@ -100,7 +100,7 @@ class Admin {
 				'wp-queue-settings-panel-script',
 				plugins_url( '/build/settings-panel.js', __DIR__ ),
 				array( 'wp-element', 'wp-components', 'wp-data', 'wp-api', 'wp-api-fetch', 'wp-redux-routine' ),
-				filemtime( plugin_dir_path( __DIR__ ) . 'build/settings-panel.js' ),
+				WP_POST_QUEUE_VERSION,
 				true
 			);
 
@@ -122,7 +122,7 @@ class Admin {
 				'drag-drop-reorder',
 				plugins_url( '/build/drag-drop-reorder.js', __DIR__ ),
 				array( 'wp-data', 'wp-api', 'wp-api-fetch' ),
-				'1.0',
+				WP_POST_QUEUE_VERSION,
 				true
 			);
 		}
@@ -142,14 +142,14 @@ class Admin {
 				'wp-queue-settings-panel-css',
 				plugins_url( '/build/settings-panel.css', __DIR__ ),
 				array( 'wp-components', 'wp-preferences' ),
-				'1.0.0'
+				WP_POST_QUEUE_VERSION
 			);
 
 			wp_enqueue_style(
 				'wp-queue-drag-drop-css',
 				plugins_url( '/build/drag-drop-reorder.css', __DIR__ ),
 				array(),
-				'1.0.0'
+				WP_POST_QUEUE_VERSION
 			);
 		}
 	}
