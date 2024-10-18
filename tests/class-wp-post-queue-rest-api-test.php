@@ -10,6 +10,11 @@ class Test_WP_Post_Queue_REST_API extends WP_UnitTestCase {
 	private $rest_api;
 	private $settings;
 
+	/**
+	 * Sets up the tests.
+	 *
+	 * @return void
+	 */
 	public function setUp(): void {
 		parent::setUp();
 		$this->settings = array(
@@ -20,13 +25,10 @@ class Test_WP_Post_Queue_REST_API extends WP_UnitTestCase {
 		);
 		$this->rest_api = new REST_API( $this->settings );
 	}
-
-	public function tearDown(): void {
-		parent::tearDown();
-	}
-
 	/**
 	 * Test that the get_settings method returns the correct settings from the database.
+	 *
+	 * @return void
 	 */
 	public function test_get_settings() {
 		$settings = $this->rest_api->get_settings();
@@ -40,6 +42,8 @@ class Test_WP_Post_Queue_REST_API extends WP_UnitTestCase {
 
 	/**
 	 * Test that the update_settings method updates the settings in the database correctly.
+	 *
+	 * @return void
 	 */
 	public function test_update_settings() {
 		$request = new WP_REST_Request( 'POST', '/wp-post-queue/v1/settings' );
@@ -62,6 +66,8 @@ class Test_WP_Post_Queue_REST_API extends WP_UnitTestCase {
 
 	/**
 	 * Test that the recalculate_publish_times_rest_callback method recalculates the publish times for all posts in the queue correctly.
+	 *
+	 * @return void
 	 */
 	public function test_recalculate_publish_times_rest_callback() {
 		$post_ids = array(
@@ -87,6 +93,8 @@ class Test_WP_Post_Queue_REST_API extends WP_UnitTestCase {
 	/**
 	 * Test that the endpoint returns a 200 status code and data when called correctly
 	 * Note that we check the actual sorting logic in the Manager class, instead of trying to test it twice.
+	 *
+	 * @return void
 	 */
 	public function test_shuffle_queue() {
 		$post_ids = array(
