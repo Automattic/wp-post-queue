@@ -10,6 +10,11 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	private $admin;
 	private $settings;
 
+	/**
+	 * Sets up the tests.
+	 *
+	 * @return void
+	 */
 	public function setUp(): void {
 		parent::setUp();
 		$this->settings = array(
@@ -21,21 +26,21 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 		$this->admin    = new Admin( $this->settings );
 	}
 
-	public function tearDown(): void {
-		parent::tearDown();
-	}
-
 	/**
 	 * Test the registration of the post status "queued", making sure it's in the registered post statuses.
+	 *
+	 * @return void
 	 */
 	public function test_register_post_status() {
 		$this->admin->register_post_status();
-		$this->assertTrue( in_array( 'queued', get_post_stati() ), 'The post status "queued" should be registered.' );
+		$this->assertTrue( in_array( 'queued', get_post_stati(), true ), 'The post status "queued" should be registered.' );
 	}
 
 	/**
 	 * Test the modification of post labels when the post status is "queued".
 	 * On the edit page only, the post labels should be modified to "Queue" instead of "Posts".
+	 *
+	 * @return void
 	 */
 	public function test_modify_post_labels() {
 		global $pagenow;
@@ -59,6 +64,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	/**
 	 * Test the conditional addition of the drag handle column.
 	 * The drag handle column should be added only when the post status is "queued".
+	 *
+	 * @return void
 	 */
 	public function test_conditionally_add_drag_handle_column() {
 		$columns = array(
@@ -77,6 +84,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	/**
 	 * Test the display of post states when the post status is "queued".
 	 * The post states should include "Queued" next to the post title in the admin.
+	 *
+	 * @return void
 	 */
 	public function test_display_post_states() {
 		$post        = $this->factory->post->create_and_get( array( 'post_status' => 'queued' ) );
@@ -88,6 +97,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	/**
 	 * Test the post date column status when the post status is "queued".
 	 * The post date column status should be "Queued" when the post status is "queued", instead of "Last Modified".
+	 *
+	 * @return void
 	 */
 	public function test_post_date_column_status() {
 		$post   = $this->factory->post->create_and_get( array( 'post_status' => 'queued' ) );
@@ -99,6 +110,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	/**
 	 * Test the registration of settings.
 	 * The settings "wp_queue_publish_times", "wp_queue_start_time", "wp_queue_end_time", and "wp_queue_paused" should be registered.
+	 *
+	 * @return void
 	 */
 	public function test_register_settings() {
 		$this->admin->register_settings();
@@ -111,6 +124,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	/**
 	 * Test the addition and highlighting of the queue menu item.
 	 * The menu item should be added and highlighted correctly when the post status is "queued".
+	 *
+	 * @return void
 	 */
 	public function test_adds_and_highlight_queue_menu_item() {
 		global $parent_file, $submenu_file, $pagenow;
@@ -127,6 +142,8 @@ class Test_WP_Post_Queue_Admin extends WP_UnitTestCase {
 	 * Test the set default queue order method.
 	 * The method should set the default rderby and order of the query to "date" and "ASC" when the post status is "queued".
 	 * This way we can see the next to be published post at the top of the list.
+	 *
+	 * @return void
 	 */
 	public function test_set_default_queue_order() {
 		set_current_screen( 'edit-post' );
