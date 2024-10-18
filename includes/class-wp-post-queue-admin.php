@@ -95,7 +95,7 @@ class Admin {
 	 * @return void
 	 */
 	public function enqueue_management_scripts( $hook ) {
-		if ( 'edit.php' === $hook && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
+		if ( 'edit.php' === $hook && 'queued' === get_query_var( 'post_status' ) ) {
 			wp_enqueue_script(
 				'wp-queue-settings-panel-script',
 				plugins_url( '/build/settings-panel.js', __DIR__ ),
@@ -137,7 +137,7 @@ class Admin {
 	 * @return void
 	 */
 	public function enqueue_management_styles( $hook ) {
-		if ( 'edit.php' === $hook && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
+		if ( 'edit.php' === $hook && 'queued' === get_query_var( 'post_status' ) ) {
 			wp_enqueue_style(
 				'wp-queue-settings-panel-css',
 				plugins_url( '/build/settings-panel.css', __DIR__ ),
@@ -187,7 +187,7 @@ class Admin {
 	 */
 	public function add_settings_to_edit_page() {
 		$screen = get_current_screen();
-		if ( 'edit-post' === $screen->id && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
+		if ( 'edit-post' === $screen->id && 'queued' === get_query_var( 'post_status' ) ) {
 			$this->render_settings_panel();
 		}
 	}
@@ -226,7 +226,7 @@ class Admin {
 	public function highlight_queue_menu_item() {
 		global $parent_file, $submenu_file, $pagenow;
 
-		if ( 'edit.php' === $pagenow && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
+		if ( 'edit.php' === $pagenow && 'queued' === get_query_var( 'post_status' ) ) {
 			// We ignore the global variables override here because we want to set the parent file and submenu file, and
 			// this seems to be the only way to do it.
 
@@ -248,7 +248,7 @@ class Admin {
 	public function modify_post_labels( $labels ) {
 		global $pagenow, $post_type;
 
-		if ( 'edit.php' === $pagenow && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
+		if ( 'edit.php' === $pagenow && 'queued' === get_query_var( 'post_status' ) ) {
 			$labels->name          = __( 'Queue', 'wp-post-queue' );
 			$labels->singular_name = __( 'Queue', 'wp-post-queue' );
 		}
@@ -264,8 +264,8 @@ class Admin {
 	 * @return array The modified columns.
 	 */
 	public function conditionally_add_drag_handle_column( $columns ) {
-		if ( isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
-			$new_columns = array( 'drag_handle' => '☰' );
+		if ( 'queued' === get_query_var( 'post_status' ) ) {
+			$new_columns = array( 'drag_handle' => '<span class="dashicons dashicons-menu-alt"></span>' );
 			return array_merge( $new_columns, $columns );
 		}
 		return $columns;
@@ -280,8 +280,8 @@ class Admin {
 	 * @return void
 	 */
 	public function conditionally_populate_drag_handle_column( $column, $post_id ) {
-		if ( 'drag_handle' === $column && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
-			echo '<span class="drag-handle">☰</span>';
+		if ( 'drag_handle' === $column && 'queued' === get_query_var( 'post_status' ) ) {
+			echo '<span class="drag-handle"><span class="dashicons dashicons-menu-alt"></span></span>';
 		}
 	}
 
@@ -331,11 +331,12 @@ class Admin {
 		}
 
 		$screen = get_current_screen();
-		if ( 'edit-post' === $screen->id && isset( $_GET['post_status'] ) && 'queued' === $_GET['post_status'] ) {
-			$orderby = isset( $_GET['orderby'] ) ? $_GET['orderby'] : 'date';
-			$order   = isset( $_GET['order'] ) ? $_GET['order'] : 'ASC';
-			$query->set( 'orderby', $orderby );
-			$query->set( 'order', $order );
+		if ( 'edit-post' === $screen->id && 'queued' === get_query_var( 'post_status' ) ) {
+			$orderby = get_query_var( 'orderby' );
+			$order   = get_query_var( 'order' );
+
+			$query->set( 'orderby', $orderby ? $orderby : 'date' );
+			$query->set( 'order', $order ? $order : 'ASC' );
 		}
 	}
 }
