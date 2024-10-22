@@ -2,11 +2,6 @@
 
 use WP_Post_Queue\Manager;
 
-class MockPost {
-	public $ID;
-	public $post_date;
-}
-
 /**
  * Test the Manager class.
  * Which is responsible for the queueing and publishing logic.
@@ -15,6 +10,11 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 	private $manager;
 	private $settings;
 
+	/**
+	 * Sets up the tests.
+	 *
+	 * @return void
+	 */
 	public function setUp(): void {
 		parent::setUp();
 		$this->settings = array(
@@ -30,12 +30,10 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 			->getMock();
 	}
 
-	public function tearDown(): void {
-		parent::tearDown();
-	}
-
 	/**
 	 * Test that handle_post_status_change queues a post when transitioning to queued status.
+	 *
+	 * @return void
 	 */
 	public function test_handle_post_status_change_queues_post() {
 		$post_id = $this->factory->post->create( array( 'post_status' => 'draft' ) );
@@ -56,6 +54,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 	/**
 	 * Data provider for test_calculate_next_publish_time.
 	 * We want to test a variety of scenarios to ensure the publish times are calculated correctly.
+	 *
+	 * @return array
 	 */
 	public function publishTimeProvider() {
 		return array(
@@ -212,10 +212,17 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test that the calculate_next_publish_time method calculates the next publish time for a post in the queue
+	 * and is the core logic for the queue and plugin.
+	 *
 	 * @dataProvider publishTimeProvider
 	 *
-	 * Tests that the calculate_next_publish_time method calculates the next publish time for a post in the queue
-	 * and is the core logic for the queue and plugin.
+	 * @param array        $settings       The settings for the manager.
+	 * @param array        $expected_times The expected times for the posts to be published.
+	 * @param array        $queued_posts   The IDs of the posts in the queue.
+	 * @param integer|null $current_time   The current time.
+	 *
+	 * @return void
 	 */
 	public function test_calculate_next_publish_time( $settings, $expected_times, $queued_posts, $current_time = null ) {
 		$this->manager = $this->getMockBuilder( Manager::class )
@@ -232,7 +239,7 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 		// Create a mock for each post
 		foreach ( $queued_posts as $post_id ) {
-			$post_mock              = new MockPost();
+			$post_mock              = new stdClass();
 			$post_mock->ID          = $post_id;
 			$post_mocks[ $post_id ] = $post_mock;
 		}
@@ -247,7 +254,7 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 			}
 
 			$next_publish_time                 = $this->invokeMethod( $this->manager, 'calculate_next_publish_time', array( $index, $last_publish_time ) );
-			$post_mocks[ $post_id ]->post_date = date( 'Y-m-d H:i:s', $next_publish_time );
+			$post_mocks[ $post_id ]->post_date = gmdate( 'Y-m-d H:i:s', $next_publish_time );
 
 			$calculated_times[] = $next_publish_time;
 			$this->assertEquals( $expected_times[ $index ], $next_publish_time, "The post should be scheduled correctly for index $index." );
@@ -256,6 +263,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Test that getting the current order of posts in the queue works correctly.
+	 *
+	 * @return void
 	 */
 	public function test_get_current_order() {
 		$post_ids = array(
@@ -267,7 +276,7 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 		// Sort the expected post IDs by their creation date
 		usort(
 			$post_ids,
-			function( $a, $b ) {
+			function ( $a, $b ) {
 				return get_post( $a )->post_date <=> get_post( $b )->post_date;
 			}
 		);
@@ -284,6 +293,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Test that recalculating the publish times for a new order works correctly.
+	 *
+	 * @return void
 	 */
 	public function test_recalculate_publish_times() {
 		$post_ids = array(
@@ -302,6 +313,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Test that shuffling the queue changes the order of the posts.
+	 *
+	 * @return void
 	 */
 	public function test_shuffle_queued_posts() {
 		$post_ids = array(
@@ -338,6 +351,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Test recalculation of publish times when a post is removed from the queue.
+	 *
+	 * @return void
 	 */
 	public function test_recalculate_publish_times_on_post_removal() {
 		// Create queued posts
@@ -370,6 +385,8 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Test that pausing the queue removes all scheduled events for queued posts.
+	 *
+	 * @return void
 	 */
 	public function test_pause_queue() {
 		$post_ids = array(
@@ -385,6 +402,11 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 		}
 	}
 
+	/**
+	 * Test that resuming the queue schedules the next publish time for queued posts.
+	 *
+	 * @return void
+	 */
 	public function test_resume_queue() {
 		$post_ids = array(
 			$this->factory->post->create( array( 'post_status' => 'queued' ) ),
@@ -402,12 +424,18 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 
 	/**
 	 * Helper method to invoke private or protected methods.
+	 *
+	 * @param object $instance    The object to invoke the method on.
+	 * @param string $method_name The name of the method to invoke.
+	 * @param array  $parameters  The parameters to pass to the method.
+	 *
+	 * @return mixed
 	 */
-	protected function invokeMethod( &$object, $methodName, array $parameters = array() ) {
-		$reflection = new \ReflectionClass( get_class( $object ) );
-		$method     = $reflection->getMethod( $methodName );
+	protected function invokeMethod( &$instance, $method_name, array $parameters = array() ) {
+		$reflection = new \ReflectionClass( get_class( $instance ) );
+		$method     = $reflection->getMethod( $method_name );
 		$method->setAccessible( true );
 
-		return $method->invokeArgs( $object, $parameters );
+		return $method->invokeArgs( $instance, $parameters );
 	}
 }
