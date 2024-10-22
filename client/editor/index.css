@@ -1,0 +1,74 @@
+/* When the ".disable-native-save-button" class is set on #editor, remove the default "Publish"/"Save" button */
+#editor.disable-native-save-button {
+
+	/* Hide the native "Save" button */
+	.editor-post-publish-button__button {
+		display: none;
+	}
+}
+
+/* Show the custom status button in mobile mode, when sidebar buttons are typically hidden */
+.interface-pinned-items .components-button[aria-controls="wp-post-queue-save:wp-post-queue-sidebar"] {
+	display: flex;
+}
+
+/* 
+ * Hide the 2nd "Move to ..." button in the sidebar dropdown menu.
+ * This is the button that's used to style the custom "Save" button, but it dosen't make sense in the sidebar.
+ * The original action is still avilable.
+ */
+.components-dropdown-menu__menu button[aria-controls="wp-post-queue-save:wp-post-queue-sidebar"] .wp-post-queue-save-button {
+	display: none;
+}
+
+/* Use :has() to apply styles to the outer button element containing the .wp-post-queue-save-button "icon" */
+.interface-pinned-items button.components-button.is-compact[aria-controls="wp-post-queue-save:wp-post-queue-sidebar"] {
+
+	/* Allow button to be larger than default icon size of 32px */
+	width: initial;
+
+	/* Restore regular button padding for text */
+	padding: 6px 12px;
+
+	/* Apply primary button style to the button, rather than the default of tertiary */
+	background: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+	color: var(--wp-components-color-accent-inverted, #fff);
+	outline: 1px solid #0000;
+	text-decoration: none;
+	text-shadow: none;
+	white-space: nowrap;
+
+	/* Darker color on hover*/
+	&:hover:not(:disabled) {
+		background: var(--wp-components-color-accent-darker-10, var(--wp-admin-theme-color-darker-10, #2145e6));
+		color: var(--wp-components-color-accent-inverted, #fff);
+	}
+
+	/* Show this button first in the list of plugin sidebar items */
+	order: -100;
+
+	/* When the inner button has `.is-busy`, show an animated busy state on this button */
+	&:has(.wp-post-queue-save-button.is-busy) {
+		background-image: linear-gradient(-45deg, var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #183ad6)) 33%, var(--wp-components-color-accent-darker-20, var(--wp-admin-theme-color-darker-20, #183ad6)) 70%, var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9)) 70%);
+		border-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+		color: var(--wp-components-color-accent-inverted, #fff);
+		animation: components-button__busy-animation 2.5s linear infinite;
+		background-size: 100px 100%;
+		opacity: 1;
+	}
+
+	/* When the inner button has `.is-disabled`, make the outer button appear disabled */
+	&:has(.wp-post-queue-save-button.is-disabled) {
+		cursor: none;
+		color: rgba(255, 255, 255, 0.4);
+		outline: none;
+	}
+
+	/* When the inner button has `.is-tiny`, allow "Move to" text to take two lines of height */
+	&:has(.wp-post-queue-save-button.is-tiny) {
+		height: 3rem;
+		overflow: hidden;
+		white-space: wrap;
+		width: 6rem;
+	}
+}

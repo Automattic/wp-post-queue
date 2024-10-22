@@ -59,9 +59,16 @@ class Admin {
 		wp_enqueue_script(
 			'wp-queue-plugin',
 			plugins_url( '/build/editor.js', __DIR__ ),
-			array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data' ),
+			array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-compose' ),
 			WP_POST_QUEUE_VERSION,
 			true
+		);
+
+		wp_enqueue_style(
+			'wp-post-queue-editor-css',
+			plugins_url( '/client/editor/index.css', __DIR__ ),
+			array(),
+			WP_POST_QUEUE_VERSION
 		);
 	}
 
