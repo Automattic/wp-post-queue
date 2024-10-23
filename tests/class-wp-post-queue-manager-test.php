@@ -555,7 +555,6 @@ class Test_WP_Post_Queue_Manager extends WP_UnitTestCase {
 		$index             = 0;
 		$last_publish_time = null;
 
-		// Adjust the last_publish_time for the GMT offset
 		if ( null !== $last_publish_time ) {
 			$last_publish_time += $gmt_offset * 3600;
 		}

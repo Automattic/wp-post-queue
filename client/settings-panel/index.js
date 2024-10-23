@@ -149,13 +149,12 @@ const SettingsPanel = ( {
 
 	const getTimezoneDisplay = ( timezone, gmtOffset ) => {
 		if ( timezone && ! timezone.includes( 'Etc/GMT' ) ) {
-			return timezone; // Directly return if it's a named timezone
+			return timezone;
 		}
 
 		let tzstring = '';
 		if ( ! timezone || timezone.includes( 'Etc/GMT' ) ) {
-			const offset = parseFloat( gmtOffset ); // Ensure it's a float for fractional offsets
-			console.log( 'offset', offset );
+			const offset = parseFloat( gmtOffset );
 			if ( offset === 0 ) {
 				tzstring = 'UTC+0';
 			} else if ( offset < 0 ) {
